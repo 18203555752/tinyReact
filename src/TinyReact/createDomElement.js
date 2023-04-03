@@ -1,5 +1,5 @@
 import mountElement from "./mountElement"
-import updadeDomElement from "./updadeDomElement"
+import updadeNodeElement from "./updadeNodeElement"
 
 export default function createDomElement(virtualDom) {
   let newElement =null
@@ -7,10 +7,12 @@ export default function createDomElement(virtualDom) {
     newElement = document.createTextNode(virtualDom.prop.textContent)
   }else{
     newElement = document.createElement(virtualDom.type)
-    updadeDomElement(newElement, virtualDom)
-    virtualDom.children.forEach((child)=> {
-      mountElement(child, newElement)
-    })
+    updadeNodeElement(newElement, virtualDom)
+    
   }
+  newElement._virtualDom = virtualDom
+  virtualDom.children.forEach((child)=> {
+    mountElement(child, newElement)
+  })
   return newElement
 }
