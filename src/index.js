@@ -54,9 +54,38 @@ const Demo = ()=> {
 
 // TinyReact.render(<Head title='你好props'></Head>, container)
 
-TinyReact.render(ele, container)
+// TinyReact.render(ele, container)
 
-setTimeout(()=> {
-  TinyReact.render(ele2, container)
-}, 2000)
+// setTimeout(()=> {
+//   TinyReact.render(ele2, container)
+// }, 2000)
 // TinyReact.render(<Head title='你好props'></Head>, container)
+
+// 类组件
+class Alert extends TinyReact.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      title: 'default title'
+    }
+
+    this.handleClick = ()=>{
+      this.setState({
+        title: 'changeTitle'
+      })
+    }
+  }
+  
+
+  render() {
+    return (<div className='类组件'> 
+      我是类组件
+      <div>{this.props.title}</div>
+      <div>{this.state.title}</div>
+      <button onClick={this.handleClick}></button>
+    </div>)
+  }
+}
+
+TinyReact.render(<Alert title='你好props' />, container)
+
