@@ -35,7 +35,6 @@ const ele2 = (
   </div>
 )
 
-console.log(ele)
 
 const container = document.getElementById('root')
 // TinyReact.render(ele, container)
@@ -53,7 +52,6 @@ const Demo = ()=> {
   return <div>hello</div>
 }
 
-// console.log(<Head></Head>)
 // TinyReact.render(<Head title='你好props'></Head>, container)
 
 TinyReact.render(ele, container)
@@ -61,3 +59,4 @@ TinyReact.render(ele, container)
 setTimeout(()=> {
   TinyReact.render(ele2, container)
 }, 2000)
+// TinyReact.render(<Head title='你好props'></Head>, container)

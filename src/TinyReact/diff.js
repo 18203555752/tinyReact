@@ -4,9 +4,11 @@ import updadeNodeElement from './updadeNodeElement'
 import createDomElement from './createDomElement'
 export default function diff(virtualDom, container, oldDom = container.firstChild) {
   const oldVirtualDom = oldDom && oldDom._virtualDom
+
   if(!oldDom) {
     // 首次渲染
     mountElement(virtualDom, container)
+
   }else if(virtualDom.type !== oldVirtualDom.type && typeof oldVirtualDom.type !== 'function'){
     const newElement = createDomElement(virtualDom)
     const parent = oldDom.parentNode
@@ -24,6 +26,7 @@ export default function diff(virtualDom, container, oldDom = container.firstChil
     virtualDom.children.forEach((child, idx)=> {
       diff(child, oldDom, oldDom.childNodes[idx])
     })
+
   }
 
 
