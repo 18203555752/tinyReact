@@ -82,10 +82,15 @@ class Alert extends TinyReact.Component{
       我是类组件
       <div>{this.props.title}</div>
       <div>{this.state.title}</div>
-      <button onClick={this.handleClick}></button>
+      <button onClick={this.handleClick}>改变title</button>
     </div>)
   }
 }
 
-TinyReact.render(<Alert title='你好props' />, container)
+TinyReact.render(<Head title='你好props' />, container)
+setTimeout(()=> {
+  TinyReact.render(<Alert title='你好props' />, container)
+}, 3000)
+
+
 

@@ -2,6 +2,7 @@ import mountElement from './mountElement.js'
 import updadeTextNodes from './updadeTextNodes'
 import updadeNodeElement from './updadeNodeElement'
 import createDomElement from './createDomElement'
+import diffComponent from './diffComponent'
 export default function diff(virtualDom, container, oldDom = container.firstChild) {
   const oldVirtualDom = oldDom && oldDom._virtualDom
 
@@ -9,10 +10,13 @@ export default function diff(virtualDom, container, oldDom = container.firstChil
     // 首次渲染
     mountElement(virtualDom, container)
 
-  }else if(virtualDom.type !== oldVirtualDom.type && typeof oldVirtualDom.type !== 'function'){
+  }else if(virtualDom.type !== oldVirtualDom.type && typeof virtualDom.type !== 'function'){
     const newElement = createDomElement(virtualDom)
     const parent = oldDom.parentNode
     parent.replaceChild(newElement, oldDom)
+  }else if(typeof virtualDom.type === 'function'){
+    const oldComponent = oldVirtualDom && oldVirtualDom.component
+    diffComponent(virtualDom, oldComponent, oldDom, container)
   }else if(oldVirtualDom && virtualDom.type === oldVirtualDom.type) {
     // 更新
     if(virtualDom.type === 'text') {
